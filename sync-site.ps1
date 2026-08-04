@@ -22,9 +22,6 @@ Copy-Item -Path (Join-Path $sourceAssets '*') -Destination $targetAssets -Recurs
 $htmlFiles = Get-ChildItem -LiteralPath $publicRoot -Filter '*.html' -File -Recurse
 foreach ($file in $htmlFiles) {
     $html = Get-Content -Raw -Encoding utf8 -LiteralPath $file.FullName
-    $html = $html.Replace('라쿠텐 STAY 하카타 기온 502', '라쿠텐 STAY 하카타 기온')
-    $html = $html.Replace('502호·6명·3박', '해당 객실·6명·3박')
-    $html = $html.Replace('502호로 결제', '해당 객실로 결제')
     if ($html -notmatch 'name="robots"') {
         $html = $html.Replace('<meta name="viewport"', '<meta name="robots" content="noindex,nofollow,noarchive">' + [Environment]::NewLine + '  <meta name="viewport"')
     }
